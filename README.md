@@ -3,7 +3,7 @@
 # MFG-CRAFT: Multi Feature Guide for RGB-Guided Thermal Image Super-Resolution
 
 ## Overview of MFG-CRAFT
-![AIR](https://github.com/DoGunKIM93/MFG-CRAFT/assets/16958744/6e1523bc-214a-4cbc-b6aa-4288113a49c6)
+MFG-CRAFT: Multi Feature Guide for RGB-Guided Thermal Image Super-Resolution
 
 ## PREREQUISITES
 Prerequisites for MFG-CRAFT.
