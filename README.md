@@ -29,7 +29,7 @@ git clone https://github.com/DoGunKIM93/MFG-CRAFT.git
 
 ## Install some required packages
 ```
-pip install fast_slic munch IQA_pytorch pillow
+pip install fast_slic munch IQA_pytorch pillow fast_pytorch_kmeans
 ```
 
 ## Dataset
