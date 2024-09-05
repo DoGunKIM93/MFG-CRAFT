@@ -693,40 +693,8 @@ class UpsampleOneStep(nn.Sequential):
         super(UpsampleOneStep, self).__init__(*m)
 
 
-class HFBA(nn.Module):
-    r""" Hybrid Fusion Block.
-
-    Args:
-        dim (int): Number of input channels.
-        num_heads (int): Number of attention heads.
-        ffn_expansion_factor (int): Define the window size.
-        bias (int): Shift size for SW-MSA.
-        LayerNorm_type (float): Ratio of mlp hidden dim to embedding dim.
-    """
-    def __init__(self, in_dim, out_dim, num_heads, ffn_expansion_factor, bias, LayerNorm_type):
-        super().__init__()
-
-        self.norm1 = LayerNorm(in_dim, LayerNorm_type)
-        self.attn = Attention(in_dim, num_heads, bias)
-        self.norm2 = LayerNorm(in_dim, LayerNorm_type)
-        self.ffn = FeedForwardA(in_dim, out_dim, ffn_expansion_factor, bias)
-        self.dim = in_dim
-        self.in_dim = in_dim
-        self.out_dim = out_dim
-
-        self.conv_shortcut = nn.Conv2d(in_dim, out_dim, kernel_size=1, stride=1, padding=0)
-
-    def forward(self, low, high):
-        self.h, self.w = low.shape[2:]
-        x = low + self.attn(self.norm1(low), high)
-        x = self.conv_shortcut(x) + self.ffn(self.norm2(x))
-
-        return x
-
-
-
-class SRWABA(nn.Module):
-    r""" Shift Rectangle Window Attention Block.
+class G_SRWAB(nn.Module):
+    r""" Guided-Shift Rectangle Window Attention Block (G-SRWAB).
 
     Args:
         dim (int): Number of input channels.
@@ -839,8 +807,8 @@ class SRWABA(nn.Module):
 
 
 
-class CRFBA(nn.Module):
-    """ Cross-Refinement Fusion Block.
+class G_CRFB(nn.Module):
+    """ Guided-Cross-Refinement Fusion Block (G-CRFB).
 
     Args:
         dim (int): Number of input channels.
@@ -869,7 +837,7 @@ class CRFBA(nn.Module):
 
         # Shift Rectangle window attention blocks
         self.srwa_blocks = nn.ModuleList([
-            SRWABA(
+            G_SRWAB(
                 dim=dim,
                 out_dim=dim,
                 num_heads=num_heads,
@@ -914,8 +882,8 @@ class CRFBA(nn.Module):
 
 
 
-class RCRFGA(nn.Module):
-    """Residual Cross-Refinement Fusion Group (RCRFG).
+class G_RCRFG(nn.Module):
+    """Guided Residual Cross-Refinement Fusion Group (G-RCRFG).
 
     Args:
         dim (int): Number of input channels.
@@ -943,7 +911,7 @@ class RCRFGA(nn.Module):
 
         self.dim = dim
 
-        self.residual_group = CRFBA(
+        self.residual_group = G_CRFB(
             dim=dim,
             depth=depth,
             num_heads=num_heads,
@@ -1050,7 +1018,7 @@ class MFG_CRT(nn.Module):
         # build Residual Cross-Refinement Fusion Group
         self.layers = nn.ModuleList()
         for i_layer in range(self.num_layers):
-            layer = RCRFGA(
+            layer = G_RCRFG(
                 dim=embed_dim,
                 depth=depths[i_layer],
                 num_heads=num_heads[i_layer],
