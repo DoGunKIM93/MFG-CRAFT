@@ -1,12 +1,12 @@
  
 
-# MFG-CRAFT: Multi Feature Guide for RGB-Guided Thermal Image Super-Resolution
+# MFG-CRT: Multi-Feature Guided Cross-Refinement Transformer for RGB-Guided Thermal Image Super-Resolution
 
-## Overview of MFG-CRAFT
-MFG-CRAFT: Multi Feature Guide for RGB-Guided Thermal Image Super-Resolution
+## Overview of MFG-CRT
+MFG-CRT: Multi-Feature Guided Cross-Refinement Transformer for RGB-Guided Thermal Image Super-Resolution
 
 ## PREREQUISITES
-Prerequisites for MFG-CRAFT.
+Prerequisites for MFG-CRT.
 
 ## OS
 AIR Research Framework is supported on Ubuntu 16.04 LTS or above.
@@ -24,7 +24,7 @@ docker pull nvcr.io/nvidia/pytorch:20.03-py3
 
 ## Clone
 ```
-git clone https://github.com/DoGunKIM93/MFG-CRAFT.git
+git clone https://github.com/DoGunKIM93/MFG-CRT.git
 ```
 
 ## Install some required packages
@@ -33,24 +33,24 @@ pip install fast_slic munch IQA_pytorch pillow fast_pytorch_kmeans
 ```
 
 ## Dataset
-PBVS 24 ×16 Guided Thermal Image Super-Resolution Dataset
+×16 Guided Thermal Image Super-Resolution Dataset
 ```
 datasetPath: 'dataset directory path' (in Param.yaml)
 ```
 
 ## Pre-trained
-MFG-CRAFT Pre-trained
+MFG-CRT Pre-trained
 ```
 pretrainedPath: 'Pre-trained directory path' (in Param.yaml)
 ```
 
 ## Train 
-At MFG-CRAFT folder, type following command:
+At MFG-CRT folder, type following command:
 ```
 python main.py
 ```
 ## Test
-At MFG-CRAFT folder, type following command:
+At MFG-CRT folder, type following command:
 ```
 python main.py -it
 ```
