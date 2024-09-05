@@ -4,8 +4,8 @@
 
 
 
-Thermal_TISR2024_Track2:
-    origin: TISR2024_track2
+Thermal_dataset:
+    origin: GTISR_dataset
     classes: 
         - mode
         - class

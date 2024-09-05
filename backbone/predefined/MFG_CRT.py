@@ -966,8 +966,8 @@ class RCRFGA(nn.Module):
 
 
 
-class MFG_CRAFT(nn.Module):
-    r""" Multi Feature Guide for RGB-Guided Thermal Image Super-Resolution
+class MFG_CRT(nn.Module):
+    r""" MFG-CRT: Multi-Feature Guided Cross-Refinement Transformer for RGB-Guided Thermal Image Super-Resolution
 
     Args:
         in_chans (int): Number of input image channels. Default: 3

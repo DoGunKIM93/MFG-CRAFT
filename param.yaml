@@ -10,15 +10,15 @@
 #################################################################################
 data:
     path: 
-        datasetPath: /home/jovyan/playGround/dgk/ResearchDevelopment/mfg-craft/ # path for the dataset (ex. /home/jovyan/playGround/dgk/ResearchDevelopment/guided-craft/)
-        pretrainedPath: /home/jovyan/playGround/dgk/ResearchDevelopment/mfg-craft/ # path for the pretrained weight (ex. /home/jovyan/playGround/dgk/ResearchDevelopment/guided-craft/)
+        datasetPath: /home/jovyan/playGround/ResearchDevelopment/mfg-crt/ # path for the dataset
+        pretrainedPath: /home/jovyan/playGround/ResearchDevelopment/mfg-crt/ # path for the pretrained weight
         
 
 
     datasetComponent:
 
-        Thermal_TISR2024_Track2_SR_train:
-            dataConfig: Thermal_TISR2024_Track2
+        Thermal_SR_train:
+            dataConfig: Thermal_dataset
             out:
                 LR_X16:
                     type: Image
@@ -43,8 +43,8 @@ data:
                             - output_gt_THER_HR
 
 
-        Thermal_TISR2024_Track2_SR_validation:
-            dataConfig: Thermal_TISR2024_Track2
+        Thermal_SR_validation:
+            dataConfig: Thermal_dataset
             out:
                 LR_X16:
                     type: Image
@@ -69,8 +69,8 @@ data:
                             - output_gt_THER_HR
 
 
-        Thermal_TISR2024_Track2_SR_test:
-            dataConfig: Thermal_TISR2024_Track2
+        Thermal_SR_test:
+            dataConfig: Thermal_dataset
             out:
                 LR_X16:
                     type: Image
@@ -91,9 +91,9 @@ data:
 
     dataLoader:
 
-        train_tisr2024:
+        train_gtisr:
             datasetComponent: # Must be list
-                - Thermal_TISR2024_Track2_SR_train
+                - Thermal_SR_train
             batchSize: 4
             type: float
             range: 0~1
@@ -120,9 +120,9 @@ data:
                 # - toTensor()
 
 
-        validation_tisr2024:
+        validation_gtisr:
             datasetComponent: # Must be list
-                - Thermal_TISR2024_Track2_SR_validation
+                - Thermal_SR_validation
             batchSize: 1
             type: float
             range: 0~1
@@ -142,9 +142,9 @@ data:
                 # - toTensor()
 
 
-        inference_tisr2024:
+        inference_gtisr:
             datasetComponent: # Must be list
-                - Thermal_TISR2024_Track2_SR_test
+                - Thermal_SR_test
             batchSize: 1
             type: float
             range: 0~1

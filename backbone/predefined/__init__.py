@@ -1,5 +1,5 @@
 
 ##### MFG_CRAFT #####
-from backbone.predefined.MFG_CRAFT import MFG_CRAFT
+from backbone.predefined.MFG_CRT import MFG_CRT
 
-__all__ = [ 'MFG_CRAFT' ]
+__all__ = [ 'MFG_CRT' ]

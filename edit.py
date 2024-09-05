@@ -45,8 +45,8 @@ from warmup_scheduler import GradualWarmupScheduler
 ################ V E R S I O N ################
 # VERSION START (DO NOT EDIT THIS COMMENT, for tools/codeArchiver.py)
 
-version = '1-ICASSP2024'
-subversion = '1-mfg_craft'
+version = '1-ICASSP2025'
+subversion = '1-mfg_crt'
 
 # VERSION END (DO NOT EDIT THIS COMMENT, for tools/codeArchiver.py)
 ###############################################
@@ -76,7 +76,7 @@ class ModelList(structure.ModelListBase):
         # trainStep() 에서 사용 방법
         # modelList.(모델 인스턴스 이름)_optimizer
         ##############################################################
-        self.NET = predefined.MFG_CRAFT(
+        self.NET = predefined.MFG_CRT(
                  in_chans=3,
                  aux_in_chans=1,
                  out_chans=1,
@@ -94,8 +94,7 @@ class ModelList(structure.ModelListBase):
                  upsampler='',
                  resi_connection='1conv')
         self.NET_optimizer = torch.optim.RAdam(self.NET.parameters(), lr=1.e-4)
-        # self.NET_pretrained = "./CRAFT_SRx4.pth" # Not the same for Guided_CRAFT
-        self.NET_pretrained = "./MFG-CRAFT_SRx16.pth"
+        self.NET_pretrained = "./MFG-CRT_SRx16.pth"
         
         self.initApexAMP()
         self.initDataparallel()
@@ -200,7 +199,7 @@ def inferenceStep(epoch, modelList, dataDict):
 modelList = ModelList()
 
 trainEpoch = Epoch( 
-                    dataLoader = DataLoader('train_tisr2024'),
+                    dataLoader = DataLoader('train_gtisr'),
                     modelList = modelList,
                     step = trainStep,
                     researchVersion = version,
@@ -217,7 +216,7 @@ trainEpoch = Epoch(
 
 
 validationEpoch = Epoch( 
-                    dataLoader = DataLoader('validation_tisr2024'),
+                    dataLoader = DataLoader('validation_gtisr'),
                     modelList = modelList,
                     step = validationStep,
                     researchVersion = version,
@@ -234,7 +233,7 @@ validationEpoch = Epoch(
 
 
 inferenceEpoch = Epoch( 
-                    dataLoader = DataLoader('inference_tisr2024'),
+                    dataLoader = DataLoader('inference_gtisr'),
                     modelList = modelList,
                     step = inferenceStep,
                     researchVersion = version,
